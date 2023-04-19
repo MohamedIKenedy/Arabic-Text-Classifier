@@ -8,6 +8,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import cross_val_score, train_test_split
+import sklearn
 from sklearn.linear_model import SGDClassifier
 import os
 
