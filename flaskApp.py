@@ -65,7 +65,9 @@ if __name__ == '__main__':
     for topic in topics:
         stories=pd.concat([stories,pd.read_csv(f"dataset/stories_{topic}.csv")])
     stories.drop(columns=["Unnamed: 0"],axis=1,inplace=True)
-    file1 = open(os.path.join(dir_path, "stopwordsarabic.txt"), 'r', encoding='utf-8') 
+    file_path = os.path.abspath("stopwordsarabic.txt")
+    file1 = open(file_path, 'r', encoding='utf-8')
+
     stopwords_arabic = file1.read().splitlines()+["المغرب","المغربية","المغربي"]
         
     stories["storyClean"]=stories["story"].apply(lambda s: preprocessText(s,stopwords_arabic))
