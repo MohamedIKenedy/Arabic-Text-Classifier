@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify,render_template
+from flask import Flask, request, jsonify, render_template
 import pandas as pd
 import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
@@ -39,7 +39,6 @@ def preprocessText(text,stopwords,wordcloud=False):
 def home():
     return render_template('index.html')
 
-
 @app.route('/classify', methods=['POST'])
 def predict() -> str:
     text = request.form.get('text')
@@ -54,7 +53,6 @@ def predict() -> str:
     except Exception as e:
         print(e)
         return "An error occurred while predicting the category" + f" {text}"
-
 
 if __name__ == '__main__':
     # get current file's directory
