@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="utf-8">
+        <title> A-Classifier </title>
+        <meta name="description" content="Arabic text classifier">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/class.ico') }}">
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title">Arabic text classifier </h1>
+            <div class="wrapper">
+                <h2>
+                    Enter your text
+                </h2>
+                <form method="post" action="/classify">
+                    <textarea name='text' placeholder="اكتب هنا" id="text" cols="30" rows="10"></textarea>
+                    <input type="file" id="upload" name="upload" accept=".txt">
+                    <button id="submit-btn" type="submit">Submit</button>
+                </form>
+                
+            </div>
+            <div id="result"></div>
+        </div>
+
+        <!-- Javascript code-->
+        <script>
+            const textarea = document.querySelector("#text");
+            const upload = document.querySelector("#upload");
+            upload.addEventListener("change", () => {
+              const file = upload.files[0];
+              const reader = new FileReader();
+              reader.addEventListener("load", () => {
+                textarea.value = reader.result;
+              });
+              reader.readAsText(file);
+            });
+            textarea.addEventListener("keyup", e => {
+                textarea.style.height = "200px";
+                let scHeight = e.target.scrollHeight;
+                textarea.style.height = `${scHeight}px`;
+            });
+
+
+        </script>
+    </body>
+</html>

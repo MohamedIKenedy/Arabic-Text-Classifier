@@ -1,0 +1,170 @@
+/* Importing fonts - poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins" , "press start 2p";
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(#4671EA,#AC34E7);
+
+}
+
+.wrapper{
+    width: 470px;
+    background: #fff;
+    border-radius: 5px;
+    padding: 25px 25px 30px;
+}
+
+.wrapper h2{
+    color: #4671EA;
+    font-size: 28px;
+    text-align: center;
+    border-radius: 10px;
+}
+.wrapper textarea {
+    width: 400px;
+    height: 200px;
+    padding: 15px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    font-size: 16px;
+    border-color: #bfbfbf;
+    max-height: 330px;
+    margin-bottom: 20px;
+    font-family: 'Mada';
+    text-align: right;
+}
+textarea:is(:focus, :valid){
+    border-width: 2px;
+    padding: 14px;
+    border-color : #446ee2;
+
+}
+textarea::-webkit-scrollbar{
+    width: 0px;
+}
+
+#upload {
+    background-color: #426cf6;
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    align-items: center;
+    margin-top: 10px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+
+/* Style the upload button when hovering over it */
+#upload:hover {
+    background-color: #3a8de6;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 38px;
+    text-align: center;
+    padding: 30px;
+  }
+
+.title {
+    animation: color-animation 3s infinite;
+  }
+  
+@keyframes color-animation {
+    0% {
+      color: rgb(230, 111, 111);
+    }
+    25% {
+      color: rgb(158, 244, 190);
+    }
+    50% {
+      color: rgb(98, 225, 98);
+    }
+    75% {
+      color: rgb(84, 231, 180);
+    }
+    100% {
+      color: rgb(230, 111, 111);
+    }
+  }
+
+  .classify {
+    padding: 10px 20px;
+    background-color: #3176f5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    
+  }
+  
+  #submit-btn:hover {
+    background-color: #3e718e;
+  }
+  
+  #submit-btn:active {
+    background-color: #70d3ee;
+    box-shadow: 0 5px #84b9b5;
+    transform: translateY(4px);
+  }
+#submit-btn {
+                background-color: #3161a5;
+                border: none;
+                color: white;
+                padding: 12px 24px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 4px;
+                margin: 0 auto; /* Set left and right margins to "auto" */
+                display: block;
+                margin-top: 0px;
+            }
+
+/* In style.css */
+.predicted-category {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 3rem;
+  color: #076e27;
+  animation-name: color-change;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  font-family: cursive;
+}
+
+@keyframes color-change {
+  0% {
+    color: #333;
+  }
+  50% {
+    color: #f44336;
+  }
+  100% {
+    color: #333;
+  }
+}
