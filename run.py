@@ -13,6 +13,11 @@ from sklearn.linear_model import SGDClassifier
 import os
 
 
+file_path = os.path.abspath("stopwordsarabic.txt")
+file1 = open(file_path, 'r', encoding='utf-8')
+
+stopwords_arabic = file1.read().splitlines()+["المغرب","المغربية","المغربي"]
+     
 
 # Get the path of the current file
 current_path = os.path.abspath(__file__)
@@ -67,11 +72,7 @@ if __name__ == '__main__':
     for topic in topics:
         stories=pd.concat([stories,pd.read_csv(f"dataset/stories_{topic}.csv")])
     stories.drop(columns=["Unnamed: 0"],axis=1,inplace=True)
-    file_path = os.path.abspath("stopwordsarabic.txt")
-    file1 = open(file_path, 'r', encoding='utf-8')
-
-    stopwords_arabic = file1.read().splitlines()+["المغرب","المغربية","المغربي"]
-        
+       
     stories["storyClean"]=stories["story"].apply(lambda s: preprocessText(s,stopwords_arabic))
     vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(stories["storyClean"])
