@@ -29,6 +29,7 @@ dir_name = os.path.dirname(current_path)
 
 app = Flask(__name__, template_folder="templates", static_url_path="/" + os.path.join(dir_name, "static"))
 
+
 def removeStopWords(text,stopwords):
         text_tokens = word_tokenize(text)
         return " ".join([word for word in text_tokens if not word in stopwords])
@@ -44,6 +45,29 @@ def preprocessText(text,stopwords,wordcloud=False):
         text=arabic_reshaper.reshape(noPunctuation)
         return text
     return noPunctuation
+
+
+# get current file's directory
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+stories=pd.DataFrame()
+topics=["tamazight","sport","societe","regions","politique","orbites","medias","marocains-du-monde","faits-divers","economie","art-et-culture"]
+for topic in topics:
+    stories=pd.concat([stories,pd.read_csv(f"dataset/stories_{topic}.csv")])
+stories.drop(columns=["Unnamed: 0"],axis=1,inplace=True)
+       
+stories["storyClean"]=stories["story"].apply(lambda s: preprocessText(s,stopwords_arabic))
+X = vectorizer.fit_transform(stories["storyClean"])
+y=stories.topic
+
+model = SGDClassifier(random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model.partial_fit(X_train, y_train, classes=np.unique(y))
+model_filename = 'model.joblib'
+joblib.dump(model, os.path.join(dir_path, model_filename))
+print(f"Model saved as {model_filename}")
+
 
 @app.route('/')
 def home():
@@ -67,25 +91,4 @@ def predict() -> str:
 
 
 if __name__ == '__main__':
-    # get current file's directory
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-
-    stories=pd.DataFrame()
-    topics=["tamazight","sport","societe","regions","politique","orbites","medias","marocains-du-monde","faits-divers","economie","art-et-culture"]
-    for topic in topics:
-        stories=pd.concat([stories,pd.read_csv(f"dataset/stories_{topic}.csv")])
-    stories.drop(columns=["Unnamed: 0"],axis=1,inplace=True)
-       
-    stories["storyClean"]=stories["story"].apply(lambda s: preprocessText(s,stopwords_arabic))
-    X = vectorizer.fit_transform(stories["storyClean"])
-    y=stories.topic
-
-    model = SGDClassifier(random_state=42)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    model.partial_fit(X_train, y_train, classes=np.unique(y))
-    model_filename = 'model.joblib'
-    joblib.dump(model, os.path.join(dir_path, model_filename))
-    print(f"Model saved as {model_filename}")
-
     app.run()
