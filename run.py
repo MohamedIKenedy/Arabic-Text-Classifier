@@ -12,6 +12,7 @@ from sklearn.model_selection import cross_val_score, train_test_split
 import sklearn
 from sklearn.linear_model import SGDClassifier
 import os
+import joblib
 
 nltk.download('punkt')
 
@@ -19,7 +20,7 @@ file_path = os.path.abspath("stopwordsarabic.txt")
 file1 = open(file_path, 'r', encoding='utf-8')
 
 stopwords_arabic = file1.read().splitlines()+["المغرب","المغربية","المغربي"]
-     
+vectorizer = TfidfVectorizer() 
 
 # Get the path of the current file
 current_path = os.path.abspath(__file__)
@@ -76,7 +77,6 @@ if __name__ == '__main__':
     stories.drop(columns=["Unnamed: 0"],axis=1,inplace=True)
        
     stories["storyClean"]=stories["story"].apply(lambda s: preprocessText(s,stopwords_arabic))
-    vectorizer = TfidfVectorizer()
     X = vectorizer.fit_transform(stories["storyClean"])
     y=stories.topic
 
@@ -84,5 +84,8 @@ if __name__ == '__main__':
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     model.partial_fit(X_train, y_train, classes=np.unique(y))
+    model_filename = 'model.joblib'
+    joblib.dump(model, os.path.join(dir_path, model_filename))
+    print(f"Model saved as {model_filename}")
 
     app.run()
