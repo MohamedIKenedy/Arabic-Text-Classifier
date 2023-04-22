@@ -14,7 +14,7 @@ from sklearn.linear_model import SGDClassifier
 import os
 import joblib
 
-
+nltk.download('punkt')
 
 file_path = os.path.abspath("stopwordsarabic.txt")
 file1 = open(file_path, 'r', encoding='utf-8')
@@ -91,5 +91,4 @@ def predict() -> str:
 
 
 if __name__ == '__main__':
-    nltk.download('punkt')
     app.run()
