@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify,render_template
 import pandas as pd
 import nltk
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from nltk.tokenize import word_tokenize
 from nltk.tokenize import RegexpTokenizer
 import arabic_reshaper
@@ -14,7 +14,7 @@ from sklearn.linear_model import SGDClassifier
 import os
 import joblib
 
-nltk.download('punkt')
+#nltk.download('punkt')
 
 file_path = os.path.abspath("stopwordsarabic.txt")
 file1 = open(file_path, 'r', encoding='utf-8')
