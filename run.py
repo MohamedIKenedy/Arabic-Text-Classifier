@@ -61,7 +61,13 @@ stories["storyClean"]=stories["story"].apply(lambda s: preprocessText(s,stopword
 X = vectorizer.fit_transform(stories["storyClean"])
 y=stories.topic
 
+model = SGDClassifier(random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
+model.partial_fit(X_train, y_train, classes=np.unique(y))
+# model_filename = 'model.joblib'
+# joblib.dump(model, os.path.join(dir_path, model_filename))
+# print(f"Model saved as {model_filename}")
 
 
 @app.route('/')
@@ -86,11 +92,4 @@ def predict() -> str:
 
 
 if __name__ == '__main__':
-    model = SGDClassifier(random_state=42)
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-    model.partial_fit(X_train, y_train, classes=np.unique(y))
-    model_filename = 'model.joblib'
-    joblib.dump(model, os.path.join(dir_path, model_filename))
-    print(f"Model saved as {model_filename}")
     app.run()
