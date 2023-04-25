@@ -30,7 +30,6 @@ dir_name = os.path.dirname(current_path)
 app = Flask(__name__, template_folder="templates", static_url_path="/" + os.path.join(dir_name, "static"))
 
 
-
 def removeStopWords(text,stopwords):
         text_tokens = word_tokenize(text)
         return " ".join([word for word in text_tokens if not word in stopwords])
