@@ -35,7 +35,7 @@ This project implements an Arabic text classifier using the TF-IDF (Term Frequen
 
 ## Support
 
-For inquiries or issues, contact [Your Contact Information].
+For inquiries or issues, contact mohamedifqir3@gmail.com
 
 ## License
-
+Mohamed IFQIR all rights reserved 2023
