@@ -14,7 +14,7 @@ This project implements an Arabic text classifier using the TF-IDF (Term Frequen
 
 2. **Web Application**:
 
-   - Start the Flask server with `app.py`.
+   - Start the Flask server with `run.py`.
    - Access the web app via the provided URL.
    - Input Arabic text for classification.
 
@@ -30,7 +30,7 @@ This project implements an Arabic text classifier using the TF-IDF (Term Frequen
 1. **Data Collection**: Obtain the Hespress Arabic news corpus.
 2. **Data Preprocessing**: Clean text data (stop words removal, tokenization).
 3. **Feature Extraction**: Apply TF-IDF vectorization.
-4. **Model Training**: Fit the TF-IDF vectors to a classifier model.
+4. **Model Training**: Fit the TF-IDF vectors to the SGD classifier model.
 5. **Evaluation**: Assess model performance.
 
 ## Support
